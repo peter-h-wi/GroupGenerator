@@ -33,7 +33,7 @@ struct ContentView: View {
                     TextField("Type Name", text: $person)
                         .disableAutocorrection(true)
                         .onSubmit {
-                            people.append(person)
+                            people.insert(person, at: 0)
                             person = ""
                             focusedField = .name
                         }
@@ -52,7 +52,7 @@ struct ContentView: View {
                 .disabled(numberPerGroup==0 || people.count==0)
                 
                 Section("List of signed people - \(people.count) people") {
-                    ForEach(people.reversed(), id: \.self) { person in
+                    ForEach(people, id: \.self) { person in
                         Text(person)
                     }
                     .onDelete(perform: removeRows)
